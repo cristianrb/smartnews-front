@@ -11,9 +11,9 @@
 
                     <!-- COLUMNA DEL MENU DE NAVEGACION DERECHO -->
                     <nav class="col-12 col-sm-3 col-lg-2 order-1 order-sm-2 menu d-flex justify-content-between ml-auto mb-2 mb-sm-0">
-                        <a href="#"><img src="../assets/img/new.png" alt=""></a>
-                        <a href="#"><img src="../assets/img/quality.png" alt=""></a>
-                        <a href="#"><img src="../assets/img/rating.png" alt=""></a>
+                        <router-link to="/home"><img src="../assets/img/new.png" alt=""></router-link>
+                        <router-link to="/recommendations"><img src="../assets/img/quality.png" alt=""></router-link>
+                        <router-link to="/rated"><img src="../assets/img/rating.png" alt=""></router-link>
                     </nav>
                 </div>
             </div>

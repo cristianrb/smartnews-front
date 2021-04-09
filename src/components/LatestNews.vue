@@ -6,7 +6,7 @@
           <div id="contributions" v-if="contributions">
               <News :contributions="contributions"></News>
           </div>
-
+      
       </div>
     </div>
   </div>
