@@ -1,17 +1,17 @@
 <template>
   <HeaderComponent></HeaderComponent>
-  <NewsList></NewsList>
+  <LatestNews></LatestNews>
 </template>
 
 <script>
 import HeaderComponent from './components/HeaderComponent.vue'
-import NewsList from './components/NewsList.vue'
+import LatestNews from './components/LatestNews.vue'
 
 export default {
   name: 'App',
   components: {
     HeaderComponent,
-    NewsList
+    LatestNews
   }
 }
 </script>
