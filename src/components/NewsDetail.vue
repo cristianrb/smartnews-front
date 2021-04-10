@@ -88,6 +88,19 @@ export default {
       this.rating = rating
       console.log("Rating: " + this.rating)
       // TODO: Axios call to POST/PUT rating (if vote was null, then POST, otherwise PUT)
+      console.log(this.$gAuth.instance.currentUser.fe.Aa)
+      console.log(this.$gAuth)
+      if (this.$gAuth.instance.isSignedIn.fe) {
+      axios.post(this.url + "/contributions?id=" + this.contribution.id, this.rating)
+        .then(res => {
+          if (res.status == 200) {
+            console.log("VOTED!!!!!")
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
     },
   },
 };
