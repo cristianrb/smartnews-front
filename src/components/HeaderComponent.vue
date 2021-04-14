@@ -57,6 +57,9 @@ export default {
     };
   },
   methods: {
+    login() {
+      window.location.href = "http://localhost:8081/login"
+    },
     async handleClickSignIn() {
       try {
         const googleUser = await this.$gAuth.signIn();

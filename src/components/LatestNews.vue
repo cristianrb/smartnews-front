@@ -36,7 +36,11 @@ export default {
   },
   methods: {
     getInitialNews() {
-      axios.get(Global.url + "/latest").then((res) => {
+      let headers = {
+              'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMDc0OTUyNDQ1NjQ5NTc5NTQ2NzUiLCJleHAiOjU3NzUwNjk0Mjk1fQ._hYcrnkxSps4fpYM2hSNOevOTo7iaSnw5YT4QUe8aCjA2oJ5GBIEZOkyxaugX6_ln_1mVaA6tw6xgW-Jlei76g',
+              'Content-Type': 'application/json'
+            };
+      axios.get(Global.url + "/latest", {'headers': headers}).then((res) => {
         console.log(res);
         this.contributions = this.formatAndReduceDescription(res.data.content);
       });
@@ -49,8 +53,14 @@ export default {
             document.documentElement.offsetHeight;
           if (bottomOfWindow) {
               this.lock = true;
+
+            let headers = {
+              'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMDc0OTUyNDQ1NjQ5NTc5NTQ2NzUiLCJleHAiOjU3NzUwNjk0Mjk1fQ._hYcrnkxSps4fpYM2hSNOevOTo7iaSnw5YT4QUe8aCjA2oJ5GBIEZOkyxaugX6_ln_1mVaA6tw6xgW-Jlei76g',
+              'Content-Type': 'application/json;charset=utf-8'
+            };
+            console.log(headers)  
             axios
-              .get(Global.url + "/latest?page=" + this.pageNumber)
+              .get(Global.url + "/latest?page=" + this.pageNumber, {'headers': headers})
               .then((res) => {
                 this.pageNumber++;
                 console.log(res);
