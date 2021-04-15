@@ -66,15 +66,8 @@ export default {
         if (!googleUser) {
           return null;
         }
-        console.log("googleUser", googleUser);
+        localStorage.setItem("googleIdToken", googleUser.tc.id_token)
         this.user = googleUser.getBasicProfile().getEmail();
-        console.log("getId", this.user);
-        console.log("getBasicProfile", googleUser.getBasicProfile());
-        console.log("getAuthResponse", googleUser.getAuthResponse());
-        console.log(
-          "getAuthResponse",
-          this.$gAuth.instance.currentUser.get().getAuthResponse()
-        );
       } catch (error) {
         //on fail do something
         console.error(error);
@@ -93,8 +86,9 @@ export default {
     },
     async handleClickSignOut() {
       try {
+        localStorage.removeItem("googleIdToken")
+        localStorage.removeItem("authToken")
         await this.$gAuth.signOut();
-        console.log("isAuthorized", this.Vue3GoogleOauth.isAuthorized);
         this.user = null;
       } catch (error) {
         console.error(error);

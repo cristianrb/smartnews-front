@@ -13,8 +13,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import Global from "../Global";
+import AxiosService from "../AxiosService"
 import News from "./News.vue";
 export default {
   name: "LatestNews",
@@ -22,6 +21,7 @@ export default {
       News
   },
   beforeMount() {
+    this.setPath(this.$route.path)
     this.getInitialNews();
   },
   mounted() {
@@ -32,16 +32,13 @@ export default {
       contributions: [],
       pageNumber: 1,
       lock: false,
+      path: null
     };
   },
   methods: {
     getInitialNews() {
-      let headers = {
-              'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMDc0OTUyNDQ1NjQ5NTc5NTQ2NzUiLCJleHAiOjU3NzUwNjk0Mjk1fQ._hYcrnkxSps4fpYM2hSNOevOTo7iaSnw5YT4QUe8aCjA2oJ5GBIEZOkyxaugX6_ln_1mVaA6tw6xgW-Jlei76g',
-              'Content-Type': 'application/json'
-            };
-      axios.get(Global.url + "/latest", {'headers': headers}).then((res) => {
-        console.log(res);
+      AxiosService.getLatestNews(0, this.path)
+        .then((res) => {
         this.contributions = this.formatAndReduceDescription(res.data.content);
       });
     },
@@ -54,16 +51,9 @@ export default {
           if (bottomOfWindow) {
               this.lock = true;
 
-            let headers = {
-              'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMDc0OTUyNDQ1NjQ5NTc5NTQ2NzUiLCJleHAiOjU3NzUwNjk0Mjk1fQ._hYcrnkxSps4fpYM2hSNOevOTo7iaSnw5YT4QUe8aCjA2oJ5GBIEZOkyxaugX6_ln_1mVaA6tw6xgW-Jlei76g',
-              'Content-Type': 'application/json;charset=utf-8'
-            };
-            console.log(headers)  
-            axios
-              .get(Global.url + "/latest?page=" + this.pageNumber, {'headers': headers})
+              AxiosService.getLatestNews(this.pageNumber, this.path)
               .then((res) => {
                 this.pageNumber++;
-                console.log(res);
                 this.formatAndReduceDescription(res.data.content).forEach((element) => {
                   this.contributions.push(element);
                 });
@@ -82,6 +72,9 @@ export default {
             
         })
         return contributions;
+    },
+    setPath(path) {
+      this.path = path
     }
   },
 };

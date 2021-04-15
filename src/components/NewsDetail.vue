@@ -44,14 +44,14 @@
     <div class="row">
       <div class="col">
         <p><strong>Valoración</strong></p>
-        <star-rating v-model="rating" @update:rating="setRating"></star-rating>
+        <star-rating :rating="rating" v-model="rating" @update:rating="setRating"></star-rating>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import AxiosService from "../AxiosService"
 import Global from "../Global";
 import StarRating from "vue-star-rating";
 
@@ -75,43 +75,28 @@ export default {
 
   methods: {
     getContribution(contributionId) {
-      let headers = {
-              'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMDc0OTUyNDQ1NjQ5NTc5NTQ2NzUiLCJleHAiOjU3NzUwNjk0Mjk1fQ._hYcrnkxSps4fpYM2hSNOevOTo7iaSnw5YT4QUe8aCjA2oJ5GBIEZOkyxaugX6_ln_1mVaA6tw6xgW-Jlei76g',
-              'Content-Type': 'application/json'
-            };
-      axios
-        .get(this.url + "/contributions?id=" + contributionId, {'headers': headers})
+      AxiosService.getNewsDetail(contributionId)
         .then((res) => {
-          console.log(res);
           if (res.status == 200) {
             this.contribution = res.data;
+            this.rating = this.contribution.vote
           }
         });
     },
     setRating(rating) {
       this.rating = rating
-      console.log("Rating: " + this.rating)
-      // TODO: Axios call to POST/PUT rating (if vote was null, then POST, otherwise PUT)
-      /*axios.post(this.url + "/contributions?id=" + this.contribution.id, this.rating, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })*/
-      let headers = {
-              'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMDc0OTUyNDQ1NjQ5NTc5NTQ2NzUiLCJleHAiOjU3NzUwNjk0Mjk1fQ._hYcrnkxSps4fpYM2hSNOevOTo7iaSnw5YT4QUe8aCjA2oJ5GBIEZOkyxaugX6_ln_1mVaA6tw6xgW-Jlei76g',
-              'Content-Type': 'application/json'
-            };
-      axios.post(this.url + "/contributions?id=" + this.contribution.id, rating, {'headers': headers})
+      AxiosService.postRating(this.contribution.id, rating)
         .then(res => {
           if (res.status == 200) {
             console.log("VOTED!!!!!")
+            // To do alert
           }
         })
         .catch(error => {
           console.log(error)
         })
       
-    },
+    }
   },
 };
 </script>
