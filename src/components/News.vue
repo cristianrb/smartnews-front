@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!contributions.length && !this.$route.path.includes('home')">
+  <div v-if="!contributions.length && (this.$route.path.includes('rated') || this.$route.path.includes('recommendations'))">
     <h1>Vaya... parece que no hay nada por aquí! Prueba a puntuar unas cuantas noticias primero :)</h1>
   </div>
   <div

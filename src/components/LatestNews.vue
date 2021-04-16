@@ -1,11 +1,8 @@
 <template>
-  <div class="LatestNews">
-    <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center mt-4">
+  <div class="LatestNews container-fluid">
+    <div class="row row-cols-lg-2 g-4 justify-content-center mt-4">
       <div class="col">
-          <loading :active="isLoading" 
-        :can-cancel="true" 
-        :on-cancel="onCancel"
-        :is-full-page="true"></loading>
+          <loading :active="isLoading" :is-full-page="true"></loading>
           <div id="contributions" v-if="contributions">
               <News :contributions="contributions"></News>
           </div>

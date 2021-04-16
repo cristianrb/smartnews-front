@@ -3,20 +3,18 @@
   <div>
     <router-view :key="$route.path"></router-view>
   </div>
-
+  <ScrollTopArrow></ScrollTopArrow>
 </template>
 
 <script>
 import HeaderComponent from './components/HeaderComponent.vue'
-//import LatestNews from './components/LatestNews.vue'
-//import NewsDetail from './components/NewsDetail.vue'
+import ScrollTopArrow from './components/ScrollTopArrow'
 
 export default {
   name: 'App',
   components: {
     HeaderComponent,
-    //LatestNews,
-    //NewsDetail
+    ScrollTopArrow
   }
 }
 </script>
