@@ -1,6 +1,6 @@
 var Global = {
-    //url: "https://smart-news-fib.herokuapp.com/api",
-    url: "http://localhost:8081/api"
+    url: "https://smart-news-frontend.herokuapp.com/"
+    //url: "http://localhost:8080/"
 };
 
 export default Global

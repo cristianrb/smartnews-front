@@ -16,10 +16,10 @@
             <router-link to="/home"
               ><img src="../assets/img/new.png" alt=""
             /></router-link>
-            <router-link to="/recommendations"
+            <router-link v-if="Vue3GoogleOauth.isAuthorized" to="/recommendations"
               ><img src="../assets/img/quality.png" alt=""
             /></router-link>
-            <router-link to="/rated"
+            <router-link v-if="Vue3GoogleOauth.isAuthorized" to="/rated"
               ><img src="../assets/img/rating.png" alt=""
             /></router-link>
             <div v-if="!Vue3GoogleOauth.isAuthorized" class="ps-2">
@@ -48,18 +48,17 @@
 
 <script>
 import { inject, toRefs } from "vue";
+import AxiosService from "../AxiosService"
 
 export default {
   name: "HeaderComponent",
   data() {
     return {
       user: null,
+      authorized: localStorage.getItem("authorized")
     };
   },
   methods: {
-    login() {
-      window.location.href = "http://localhost:8081/login"
-    },
     async handleClickSignIn() {
       try {
         const googleUser = await this.$gAuth.signIn();
@@ -68,16 +67,8 @@ export default {
         }
         localStorage.setItem("googleIdToken", googleUser.tc.id_token)
         this.user = googleUser.getBasicProfile().getEmail();
-      } catch (error) {
-        //on fail do something
-        console.error(error);
-        return null;
-      }
-    },
-    async handleClickGetAuthCode() {
-      try {
-        const authCode = await this.$gAuth.getAuthCode();
-        console.log("authCode", authCode);
+        AxiosService.login(googleUser.tc.id_token)
+        this.$router.push(this.$router.currentRoute)
       } catch (error) {
         //on fail do something
         console.error(error);
@@ -88,15 +79,15 @@ export default {
       try {
         localStorage.removeItem("googleIdToken")
         localStorage.removeItem("authToken")
+        localStorage.removeItem("authorized")
+        this.authorized = null
         await this.$gAuth.signOut();
         this.user = null;
+        this.$router.push({name: "home"})
       } catch (error) {
         console.error(error);
       }
-    },
-    handleClickDisconnect() {
-      window.location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${window.location.href}`;
-    },
+    }
   },
   setup(props) {
     const { isSignIn } = toRefs(props);

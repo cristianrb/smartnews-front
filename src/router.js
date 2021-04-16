@@ -4,7 +4,7 @@ import NewsDetail from './components/NewsDetail'
 
 const routes = [
     {path: '/', component: LatestNews},
-    {path: '/home', component: LatestNews},
+    {path: '/home', name: 'home', component: LatestNews},
     {path: '/rated', component: LatestNews},
     {path: '/recommendations', component: LatestNews},
     {path: '/contribution/:id', name: 'contribution', component: NewsDetail}
@@ -12,7 +12,7 @@ const routes = [
 
 const router = createRouter({
     routes,
-    history: createWebHistory()
+    history: createWebHistory(),
 })
 
 export default router

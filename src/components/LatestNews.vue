@@ -2,7 +2,10 @@
   <div class="LatestNews">
     <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center mt-4">
       <div class="col">
-        
+          <loading :active="isLoading" 
+        :can-cancel="true" 
+        :on-cancel="onCancel"
+        :is-full-page="true"></loading>
           <div id="contributions" v-if="contributions">
               <News :contributions="contributions"></News>
           </div>
@@ -15,10 +18,14 @@
 <script>
 import AxiosService from "../AxiosService"
 import News from "./News.vue";
+// Import component
+import Loading from 'vue3-loading-overlay';
+
 export default {
   name: "LatestNews",
   components: {
-      News
+      News,
+      Loading
   },
   beforeMount() {
     this.setPath(this.$route.path)
@@ -32,15 +39,19 @@ export default {
       contributions: [],
       pageNumber: 1,
       lock: false,
-      path: null
+      path: null,
+      isLoading: false
     };
   },
   methods: {
     getInitialNews() {
+      this.isLoading = true
       AxiosService.getLatestNews(0, this.path)
         .then((res) => {
         this.contributions = this.formatAndReduceDescription(res.data.content);
-      });
+      }).catch(() => {
+                    this.isLoading = false;
+                });
     },
     getFollowingNews() {
       window.onscroll = () => {
@@ -58,6 +69,7 @@ export default {
                   this.contributions.push(element);
                 });
                 this.lock = false;
+                
               });
           }
         }
@@ -69,8 +81,8 @@ export default {
                 var description = element.description.substring(0, 450) + " [...] ";
                 contributions[i].description = description;
             }
-            
         })
+        this.isLoading = false
         return contributions;
     },
     setPath(path) {

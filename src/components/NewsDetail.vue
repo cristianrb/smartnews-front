@@ -54,6 +54,7 @@
 import AxiosService from "../AxiosService"
 import Global from "../Global";
 import StarRating from "vue-star-rating";
+import swal from "sweetalert"
 
 export default {
   name: "NewsDetail",
@@ -70,6 +71,7 @@ export default {
       url: Global.url,
       contribution: null,
       rating: 0,
+      loggedIn: false
     };
   },
 
@@ -88,11 +90,22 @@ export default {
       AxiosService.postRating(this.contribution.id, rating)
         .then(res => {
           if (res.status == 200) {
-            console.log("VOTED!!!!!")
-            // To do alert
+            swal(
+              'Puntuación: ' + this.rating,
+              'Puntuación añadida correctamente! :)',
+              'success'
+            )
           }
         })
         .catch(error => {
+          console.log(error)
+          if (error.status == 401) {
+            swal(
+              'Puntuación no registrada',
+              'Debes iniciar sesión para poder puntuar una noticia.',
+              'error'
+            )
+          }
           console.log(error)
         })
       
