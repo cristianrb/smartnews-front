@@ -71,7 +71,7 @@ export default {
         this.$router.push(this.$router.currentRoute)
       } catch (error) {
         //on fail do something
-        console.error(error);
+        console.log(error);
         return null;
       }
     },
@@ -85,7 +85,7 @@ export default {
         this.user = null;
         this.$router.push({name: "home"})
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     }
   },
