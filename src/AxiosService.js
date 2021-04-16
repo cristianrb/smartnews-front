@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-let baseURL = "http://localhost:8081"
-//let baseURL = 'https://smart-news-fib.herokuapp.com'
+//let baseURL = "http://localhost:8081"
+let baseURL = 'https://smart-news-fib.herokuapp.com'
 let baseURLApi = baseURL + '/api'
 
 const apiClient = axios.create({
