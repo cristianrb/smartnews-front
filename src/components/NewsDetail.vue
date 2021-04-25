@@ -50,7 +50,7 @@
 
     <div class="row py-3">
       <div class="col">
-        <p v-html="contribution.description"></p>
+        <p class="text-justify" v-html="contribution.description"></p>
       </div>
     </div>
 

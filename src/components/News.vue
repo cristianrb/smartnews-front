@@ -1,6 +1,6 @@
 <template>
   <div v-if="!contributions.length && (this.$route.path.includes('rated') || this.$route.path.includes('recommendations'))">
-    <h1>Vaya... parece que no hay nada por aquí! Prueba a puntuar unas cuantas noticias primero :)</h1>
+    <NotRatedNews></NotRatedNews>
   </div>
   <div
     class="card border-secondary mb-3"
@@ -29,11 +29,11 @@
           <router-link
             :to="{ name: 'contribution', params: { id: contribution.id } }"
           >
-            <h4 class="card-title">
+            <h4 class="text-justify card-title me-2">
               {{ contribution.title }}
             </h4>
           </router-link>
-          <div class="card-text" v-html="contribution.description"></div>
+          <div class="card-text text-justify me-2" v-html="contribution.description"></div>
           <router-link class="btn btn-primary my-1"
             :to="{ name: 'contribution', params: { id: contribution.id } }"
           >Leer más</router-link>
@@ -52,9 +52,13 @@
 
 <script>
 import Global from "../Global";
+import NotRatedNews from "./NotRatedNews.vue";
 
 export default {
   name: "Contributions",
+  components: {
+    NotRatedNews
+  },
   props: ["contributions"],
   data() {
     return {

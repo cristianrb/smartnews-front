@@ -167,3 +167,10 @@ button {
 	cursor: pointer;
   }
 
+  .notRatedLogo {
+	width: 10%;
+}
+
+.text-justify {
+	text-align: justify;
+}
