@@ -107,9 +107,9 @@ export default {
         if (!googleUser) {
           return null;
         }
-        localStorage.setItem("googleIdToken", googleUser.tc.id_token);
+        localStorage.setItem("googleIdToken", googleUser.getAuthResponse().id_token);
         this.user = googleUser.getBasicProfile().getEmail();
-        AxiosService.login(googleUser.tc.id_token);
+        AxiosService.login(googleUser.getAuthResponse().id_token);
         this.$router.push(this.$router.currentRoute);
       } catch (error) {
         //on fail do something
