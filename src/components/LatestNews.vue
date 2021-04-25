@@ -55,7 +55,7 @@ export default {
         if (!this.lock) {
           let bottomOfWindow =
             document.documentElement.scrollTop + window.innerHeight >=
-            document.documentElement.offsetHeight;
+            (document.documentElement.offsetHeight/1.1);
           if (bottomOfWindow) {
               this.lock = true;
 
