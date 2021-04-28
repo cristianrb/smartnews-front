@@ -24,7 +24,7 @@
             <a href="#" class="c-1 d-flex align-items-center">
               <div class="d-flex flex-column text-center">
                 <router-link to="/home"
-                  ><img src="../assets/img/new2.png" alt=""
+                  ><img data-testid="newButton" src="../assets/img/new2.png" alt=""
                 /></router-link>
               </div>
             </a>
