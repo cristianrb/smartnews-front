@@ -2,7 +2,7 @@
   <div class="NewsDetail container p-3" v-if="contribution">
     <div class="row">
       <div class="col">
-        <h2>{{ contribution.title }}</h2>
+        <h2 data-testid="news-detail-title">{{ contribution.title }}</h2>
       </div>
     </div>
 
