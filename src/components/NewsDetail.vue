@@ -8,7 +8,7 @@
 
     <div class="row">
       <div class="col">
-        <small class="text-muted"
+        <small class="text-muted" data-testid="news-detail-pub-date-creator"
           >Fecha de publicación: {{ contribution.pubDate }} | Creado por:
           {{ contribution.creator }}</small
         >
@@ -19,7 +19,7 @@
       <div class="col">
         <small class="text-muted"
           >Fuente:
-          <a target="_blank" :href="contribution.link">{{
+          <a data-testid="news-detail-source" target="_blank" :href="contribution.link">{{
             contribution.source
           }}</a></small
         >
@@ -28,7 +28,7 @@
 
     <div class="row">
       <div class="col">
-        <img
+        <img data-testid="news-detail-image"
           v-if="contribution.urlImage"
           class="imgDetail py-3"
           :src="contribution.urlImage"
@@ -50,7 +50,7 @@
 
     <div class="row py-3">
       <div class="col">
-        <p class="text-justify" v-html="contribution.description"></p>
+        <p data-testid="news-detail-description" class="text-justify" v-html="contribution.description"></p>
       </div>
     </div>
 
@@ -58,6 +58,7 @@
       <div class="col">
         <p><strong>Valoración</strong></p>
         <star-rating
+          data-testid="news-detail-rating"
           :rating="rating"
           v-model="rating"
           @update:rating="setRating"
