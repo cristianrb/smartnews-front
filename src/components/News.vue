@@ -29,7 +29,7 @@
           <router-link
             :to="{ name: 'contribution', params: { id: contribution.id } }"
           >
-            <h4 class="text-justify card-title me-2">
+            <h4 class="text-justify card-title me-2" data-testid="news-title">
               {{ contribution.title }}
             </h4>
           </router-link>
