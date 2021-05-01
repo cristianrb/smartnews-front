@@ -9,7 +9,7 @@
   >
     <div class="row g-0">
       <div class="col-md-4" v-if="contribution.urlImage">
-        <img
+        <img data-testid="news-image"
           class="card-img-top img-fluid p-3"
           :src="contribution.urlImage"
           alt="Card image"
@@ -33,17 +33,17 @@
               {{ contribution.title }}
             </h4>
           </router-link>
-          <div class="card-text text-justify me-2" v-html="contribution.description"></div>
-          <router-link class="btn btn-primary my-1"
+          <div data-testid="news-description" class="card-text text-justify me-2" v-html="contribution.description"></div>
+          <router-link data-testid="news-read-more" class="btn btn-primary my-1"
             :to="{ name: 'contribution', params: { id: contribution.id } }"
           >Leer más</router-link>
         </div>
       </div>
 
       <div class="ps-3 py-2">
-        <small class="text-muted"
+        <small class="text-muted" data-testid="news-pubdate"
           >Fecha de publicación: {{ contribution.pubDate }} | Fuente:
-          <a target="_blank" :href="contribution.link">{{ contribution.source }}</a></small
+          <a data-testid="news-source" target="_blank" :href="contribution.link">{{ contribution.source }}</a></small
         >
       </div>
     </div>
