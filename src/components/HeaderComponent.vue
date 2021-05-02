@@ -34,14 +34,14 @@
                   v-if="Vue3GoogleOauth.isAuthorized"
                   to="/recommendations"
                 >
-                  <img src="../assets/img/quality2.png" alt="" />
+                  <img data-testid="recommendationButton" src="../assets/img/quality2.png" alt="" />
                 </router-link>
               </div>
             </a>
             <a href="#" class="c-3 d-flex align-items-center">
               <div class="d-flex flex-column text-center">
                 <router-link v-if="Vue3GoogleOauth.isAuthorized" to="/rated"
-                  ><img src="../assets/img/rating3.png" alt="" />
+                  ><img data-testid="ratedButton" src="../assets/img/rating3.png" alt="" />
                 </router-link>
               </div>
             </a>
@@ -49,7 +49,7 @@
              <a href="#" class="c-3 d-flex align-items-center">
               <div class="d-flex flex-column text-center">
                 <div v-if="!Vue3GoogleOauth.isAuthorized">
-                  <button
+                  <button data-testid="header-component-login-button"
                     class="btn-sm btn-outline-dark"
                     role="button"
                     style="text-transform: none"
@@ -65,7 +65,7 @@
                 </div>
 
                 <div v-if="Vue3GoogleOauth.isAuthorized">
-                  <button
+                  <button data-testid="header-component-logout-button"
                     class="btn-sm btn-outline-secondary"
                     role="button"
                     style="text-transform: none"
